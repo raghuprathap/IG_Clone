@@ -1,0 +1,246 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: IG
+  description: ig
+basePath: /api/v1
+tags:
+  - name: IG clone
+    description: IG clone end points
+  - name: IG specification
+    description: IG swagger API specification
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+
+definitions:
+  userBody:
+    type: object
+    title: user
+    properties:
+      user_id:
+        type: string
+      phone_number:
+        type: string
+      email:
+        type: string
+      profile_pic:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+  postBody:
+    type: object
+    title: post
+    properties:
+      user_id: 
+        type: string
+      timestamp:
+        type: string
+      image_url:
+        type: string 
+      video_url: 
+        type: string
+      post_id:
+        type: string
+      views:
+        type: string
+      duration:
+        type: string
+  userProfileBody:
+    type: object
+    title: userProfile
+    properties:
+      description:
+        type: string 
+      display_name:
+        type: string 
+      followers:
+        type: number 
+      following:
+        type: number 
+      posts:
+        type: number 
+      profile_photo:
+        type: string 
+      username:
+        type: string 
+      website:
+        type: string 
+      user_id:
+        type: string
+  commentBody:
+    type: object
+    title: comment
+    properties:
+      comment:
+         type: String 
+      user_id:
+        type: String 
+      likes:
+        type: array 
+      date_created:
+        type: String 
+
+
+paths:
+  /user/register:
+    post:
+      tags:
+        - user
+      parameters:
+        - name: user
+          in: body
+          description: user object
+          required: true
+          schema: 
+            $ref: "#/definitions/userBody"
+      responses:
+        200:
+          description: user successfully saved.
+  /user/login:
+    post:
+      tags:
+        - user
+      parameters:
+        - name: user
+          in: body
+          description: user object
+          required: true
+          schema: 
+            email:
+              type: string
+            password:
+              type: string
+      responses:
+        200:
+          description: login successfull.
+  /user/resetPassword:
+    put:
+      tags:
+        - user
+      parameters:
+        - name: user
+          in: body
+          description: user object
+          required: true
+          schema: 
+            email:
+              type: string
+            password:
+              type: string
+      responses:
+        200:
+          description: password reset successful.
+  /post:
+    post:
+      tags:
+        - post
+      parameters:
+        - name: post
+          in: body
+          description: post object
+          required: true
+          schema:
+            $ref: "#/definitions/postBody"
+      responses:
+        200:
+          description: post saved successfully.
+    get:
+      tags:
+        - post
+      description: Fetch all posts
+      responses:
+        200:
+          description: Fetched all posts successfully
+    delete:
+      tags:
+        - post
+      parameters:
+        -name: post
+        in: body
+        description: post ID to delete
+        required: true
+        schema:
+          post_id:
+            type: string
+      responses:
+        200:
+          description: login successfull.
+  
+  /userProfile:
+    post:
+      tags:
+        - userProfile
+      parameters:
+        - name: userProfile
+          in: body
+          description: user object
+          required: true
+          schema: 
+            $ref: "#/definitions/userProfileBody"
+      responses:
+        200:
+          description: user successfully saved.
+    get:
+      tags:
+        - userProfile
+      description: Fetch userProfile
+      parameters:
+        -name: post
+        in: body
+        description: user_id to fetch userProfile
+        required: true
+        schema:
+          user_id:
+            type: string
+      responses:
+        200:
+          description: Fetched userProfile successfully
+    put:
+      tags:
+        - userProfile
+      parameters:
+        - name: userProfile
+          in: body
+          description: user object
+          required: true
+          schema: 
+            $ref: "#/definitions/userProfileBody"
+      responses:
+        200:
+          description: user successfully updated.
+
+  /comment:
+    post:
+      tags:
+        - comment
+      parameters:
+        - name: comment
+          in: body
+          description: comment object
+          required: true
+          schema:
+            $ref: "#/definitions/commentBody"
+      responses:
+        200:
+          description: comment saved successfully.
+    get:
+      tags:
+        - comment
+      description: Fetch all comments
+      responses:
+        200:
+          description: Fetched all comments successfully
+
+  /spec:
+    get:
+      tags:
+        - Specification
+      responses:
+        200:
+          description: Return the API specification
