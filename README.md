@@ -69,7 +69,7 @@ npm run test:debug
   curl http://localhost:3000/api/v1/user
   ```
 ## Swagger
-* check API spec using swagger documentation [http://localhost:3000/api-explorer/](http://localhost:3000/api-explorer/)
+* check API spec using swagger documentation [http://host:3000/api-explorer/](http://host:3000/api-explorer/)
 
 
 ## Debug It
